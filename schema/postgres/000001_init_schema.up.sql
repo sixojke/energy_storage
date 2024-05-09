@@ -52,7 +52,7 @@ CREATE TABLE thermal_storage_history (
 );
 
 -- Таблица hydrogen_storage (Водородные накопители)
-CREATE TABLE hydrogen_storage (
+CREATE TABLE hydrogen_storage_history (
     id SERIAL PRIMARY KEY,
     characteristics_id INT REFERENCES energy_storage_characteristics(id), -- Внешний ключ к таблице характеристик 
     temperature_range INT4RANGE,                                          -- Температурный диапазон, оС
