@@ -11,12 +11,6 @@ CREATE TABLE model (
     model_name VARCHAR(50) NOT NULL    -- Название модели
 );
 
--- Таблица типов аккумуляторов
-CREATE TABLE battery_type (
-    id SERIAL PRIMARY KEY,
-    type_name VARCHAR(50) NOT NULL -- Название типа аккумулятора
-);
-
 -- Таблица основных характеристик накопителей
 CREATE TABLE energy_storage_characteristics (
     id SERIAL PRIMARY KEY,
@@ -27,6 +21,12 @@ CREATE TABLE energy_storage_characteristics (
     temperature_range INT4RANGE, -- Температурный диапазон, оС
     efficiency NUMERIC,          -- КПД, %
     self_discharge INTERVAL       -- Саморазряд, % в день
+);
+
+-- Таблица типов аккумуляторов
+CREATE TABLE battery_type (
+    id SERIAL PRIMARY KEY,
+    type_name VARCHAR(50) NOT NULL -- Название типа аккумулятора
 );
 
 -- Таблица electrochemical_battery (Электрохимические аккумуляторы)
