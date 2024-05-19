@@ -20,7 +20,7 @@ CREATE TABLE energy_storage_characteristics (
     discharge_time INTERVAL,     -- Продолжительность разряда 
     temperature_range INT4RANGE, -- Температурный диапазон, оС
     efficiency NUMERIC,          -- КПД, %
-    self_discharge INTERVAL       -- Саморазряд, % в день
+    self_discharge NUMERIC       -- Саморазряд, % в день
 );
 
 -- Таблица типов аккумуляторов
