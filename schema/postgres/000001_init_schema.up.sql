@@ -34,7 +34,7 @@ CREATE TABLE electrochemical_battery_history (
     id SERIAL PRIMARY KEY,
     type_id INT REFERENCES battery_type(id),                              -- Внешний ключ к таблице типов аккумуляторов
     characteristics_id INT REFERENCES energy_storage_characteristics(id), -- Внешний ключ к таблице характеристик 
-    temperature_range INT4RANGE,                                          -- Температурный диапазон, оС
+    temperature_range INT4RANGE NOT NULL,                                 -- Температурный диапазон, оС
     input_voltage NUMERIC,                                                -- Входное напряжение
     output_voltage NUMERIC,                                               -- Выходное напряжение
     internal_resistance NUMERIC,                                          -- Внутреннее сопротивление
