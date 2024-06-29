@@ -1,6 +1,15 @@
 version: "3.8"
 
 services:
+  app:
+    container_name: energy-storage-app
+    build: "."
+    restart: unless-stopped
+    ports:
+      - "8010:8080"
+    depends_on:
+      - "postgres_db"
+
   postgres_db:
     image: postgres
     container_name: energy-storage-postgres

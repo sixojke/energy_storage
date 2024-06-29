@@ -16,11 +16,11 @@ CREATE TABLE energy_storage_characteristics (
     id SERIAL PRIMARY KEY,
     specific_energy NUMERIC,     -- Удельная энергоемкость, Вт*ч/кг
     cycle_life INT,              -- Ресурс использования, циклов
-    charge_time INTERVAL,        -- Продолжительность заряда
-    discharge_time INTERVAL,     -- Продолжительность разряда 
+    charge_time INT4RANGE,        -- Продолжительность заряда
+    discharge_time INT4RANGE,     -- Продолжительность разряда 
     temperature_range INT4RANGE, -- Температурный диапазон, оС
     efficiency NUMERIC,          -- КПД, %
-    self_discharge NUMERIC       -- Саморазряд, % в день
+    self_discharge NUMRANGE       -- Саморазряд, % в день
 );
 
 -- Таблица типов аккумуляторов
@@ -33,6 +33,7 @@ CREATE TABLE battery_type (
 CREATE TABLE electrochemical_battery_history (
     id SERIAL PRIMARY KEY,
     type_id INT REFERENCES battery_type(id),                              -- Внешний ключ к таблице типов аккумуляторов
+    model_id INT REFERENCES model(id),                                      -- Внешний ключ к таблице моделей
     characteristics_id INT REFERENCES energy_storage_characteristics(id), -- Внешний ключ к таблице характеристик 
     temperature_range INT4RANGE NOT NULL,                                 -- Температурный диапазон, оС
     input_voltage NUMERIC,                                                -- Входное напряжение
@@ -58,7 +59,8 @@ CREATE TABLE hydrogen_storage_history (
     temperature_range INT4RANGE,                                          -- Температурный диапазон, оС
     brand_id INT REFERENCES brand(id),                                    -- Внешний ключ к таблице брендов
     model_id INT REFERENCES model(id),                                    -- Внешний ключ к таблице моделей 
-    nominal_voltage NUMERIC                                               -- Номинальное напряжение
+    nominal_voltage NUMERIC,                                               -- Номинальное напряжение
+    recorded_at TIMESTAMP DEFAULT now()                                   -- Дата и время записи
 );
 
 -- Таблица solar_panel (Солнечные панели)
@@ -93,7 +95,7 @@ CREATE TABLE inverter_type (
 CREATE TABLE inverter (
     id SERIAL PRIMARY KEY,
     type_id INT REFERENCES inverter_type(id), -- Внешний ключ к таблице типов инверторов
-    specific_energy NUMERIC                   -- Удельная энергоемкость 
+    specific_energy INT4RANGE                        -- Удельная энергоемкость 
 );
 
 -- Таблица wind_turbine_history (История ветроаккумулирующих источников)

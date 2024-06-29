@@ -1,0 +1,13 @@
+postgres:
+  host: "localhost"
+  port: 5439
+  # username in .env
+  # password in .env
+  # db_name in .env
+  ssl_mode: "disable"
+
+http_server:
+    port: "8080"
+    read_timeout: 10s
+    write_timeout: 10s
+    max_header_bytes: 10
